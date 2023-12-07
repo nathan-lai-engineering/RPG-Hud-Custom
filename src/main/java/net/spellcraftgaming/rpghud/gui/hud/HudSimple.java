@@ -4,6 +4,7 @@ import net.minecraft.client.Minecraft;
 import net.spellcraftgaming.rpghud.gui.hud.element.HudElement;
 import net.spellcraftgaming.rpghud.gui.hud.element.modern.HudElementAirModern;
 import net.spellcraftgaming.rpghud.gui.hud.element.modern.HudElementCompassModern;
+import net.spellcraftgaming.rpghud.gui.hud.element.modern.HudElementDetailsModern;
 import net.spellcraftgaming.rpghud.gui.hud.element.modern.HudElementEntityInspectModern;
 import net.spellcraftgaming.rpghud.gui.hud.element.simple.HudElementArmorSimple;
 import net.spellcraftgaming.rpghud.gui.hud.element.simple.HudElementExperienceSimple;
@@ -22,6 +23,10 @@ public class HudSimple extends HudVanilla{
 	@Override
 	public HudElement setElementAir() {
 		return new HudElementAirModern();
+	}
+	@Override
+	public HudElement setElementDetails() {
+		return new HudElementDetailsModern();
 	}
 	
 	@Override
