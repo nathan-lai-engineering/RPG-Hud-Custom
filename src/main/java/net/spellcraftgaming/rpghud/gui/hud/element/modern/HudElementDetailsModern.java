@@ -187,7 +187,7 @@ public class HudElementDetailsModern extends HudElementDetailsVanilla {
 				drawRect(gg, 2, 30 + this.offset / 2, 10 + 6 + (width / 2), 10, 0xA0000000);
 				ItemStack item = this.mc.player.getInventory().getArmor(i);
 				String s = (item.getMaxDamage() - item.getDamageValue()) + "/" + item.getMaxDamage();
-				this.renderGuiItemHalfSizeModel(item, 6, 62 + this.offset);
+				this.renderGuiItemHalfSizeModel(item, 6 + (this.settings.getPositionValue(Settings.armor_det_position)[0] * 2), 62 + (this.settings.getPositionValue(Settings.armor_det_position)[1] * 2) + this.offset);
 				if (this.settings.getBoolValue(Settings.show_durability_bar))
 					this.renderItemDurabilityBar(gg, item, 6, 62 + this.offset, 0.5f);
 				if(this.settings.getBoolValue(Settings.show_durability_number))
@@ -212,7 +212,7 @@ public class HudElementDetailsModern extends HudElementDetailsVanilla {
 				drawRect(gg, 2, 30 + this.offset / 2, 10 + 6 + (width / 2), 10, 0xA0000000);
 				String s = (item.getMaxDamage() - item.getDamageValue()) + "/" + item.getMaxDamage();
 				gg.pose().scale(0.5f, 0.5f, 0.5f);
-				this.renderGuiItemHalfSizeModel(item, 6, 62 + this.offset);
+				this.renderGuiItemHalfSizeModel(item, 6 + (this.settings.getPositionValue(Settings.item_det_position)[0] * 2), 62 + (this.settings.getPositionValue(Settings.item_det_position)[1] * 2) + this.offset);
 				if (this.settings.getBoolValue(Settings.show_durability_bar))
 					this.renderItemDurabilityBar(gg, item, 6, 62 + this.offset, 0.5f);
 				gg.drawCenteredString( this.mc.font, s, 32 + width / 2, 66 + this.offset, -1);
@@ -255,7 +255,7 @@ public class HudElementDetailsModern extends HudElementDetailsVanilla {
 				drawRect(gg, 2, 30 + this.offset / 2, 10 + 6 + (width / 2), 10, 0xA0000000);
 				String s = "x " + z;
 				gg.pose().scale(0.5f, 0.5f, 0.5f);
-				this.renderGuiItemHalfSizeModel(item, 6, 62 + this.offset);
+				this.renderGuiItemHalfSizeModel(item, 6 + (this.settings.getPositionValue(Settings.item_det_position)[0] * 2), 62 + (this.settings.getPositionValue(Settings.item_det_position)[1] * 2) + this.offset);
 				gg.drawCenteredString( this.mc.font, s, 32 + width / 2, 66 + this.offset, -1);
 				gg.pose().scale(2f, 2f, 2f);
 				this.offset += 20;
