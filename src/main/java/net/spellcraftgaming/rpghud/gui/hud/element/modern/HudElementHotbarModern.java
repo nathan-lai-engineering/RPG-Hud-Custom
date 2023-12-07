@@ -46,7 +46,7 @@ public class HudElementHotbarModern extends HudElement {
                     drawRect(gg, width / 2 - 91 + 2 + (x * 20) + posX, height - 22 - 3, 18, 18, 0x60000000);
                 }
             }
-            drawRect(gg, width / 2 - 91 + 2 + (entityplayer.getInventory().selected * 20) + posX, height - 22 - 3, 18, 18, 0x40FFFFFF);
+            drawRect(gg, width / 2 - 91 + 2 + (entityplayer.getInventory().selected * 20) + posX, height - 22 - 3, 18, 18, 0x70FFFFFF);
             if (itemstack != ItemStack.EMPTY) {
                 if (enumhandside == HumanoidArm.LEFT) {
                     drawRect(gg, width / 2 - 91 - 24 + posX, height - 22 - 5, 22, 2, 0xA0000000);
