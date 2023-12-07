@@ -325,6 +325,7 @@ public class HudElementDetailsVanilla extends HudElement {
 			gg.pose().scale(scale, scale, scale);
 			HudElement.drawRect(gg, x + 2, y + 13, 13, 2, 0x000000);
 			HudElement.drawRect(gg, x + 2, y + 13, i, 1, j);
+			gg.pose().scale(1/scale, 1/scale, 1/scale);
 		}
 	}
 

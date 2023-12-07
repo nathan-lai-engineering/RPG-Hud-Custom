@@ -190,9 +190,11 @@ public class HudElementDetailsModern extends HudElementDetailsVanilla {
 				this.renderGuiItemHalfSizeModel(item, 6 + (this.settings.getPositionValue(Settings.armor_det_position)[0] * 2), 62 + (this.settings.getPositionValue(Settings.armor_det_position)[1] * 2) + this.offset);
 				if (this.settings.getBoolValue(Settings.show_durability_bar))
 					this.renderItemDurabilityBar(gg, item, 6, 62 + this.offset, 0.5f);
-				if(this.settings.getBoolValue(Settings.show_durability_number))
+				if(this.settings.getBoolValue(Settings.show_durability_number)){
+					gg.pose().scale(0.5f, 0.5f, 0.5f);
 					gg.drawCenteredString( this.mc.font, s, 32 + width / 2, 66 + this.offset, -1);
-				gg.pose().scale(2f, 2f, 2f);
+					gg.pose().scale(2f, 2f, 2f);
+				}
 				this.offset += 20;
 			}
 		}
@@ -216,8 +218,11 @@ public class HudElementDetailsModern extends HudElementDetailsVanilla {
 				this.renderGuiItemHalfSizeModel(item, 6 + (this.settings.getPositionValue(Settings.item_det_position)[0] * 2), 62 + (this.settings.getPositionValue(Settings.item_det_position)[1] * 2) + this.offset);
 				if (this.settings.getBoolValue(Settings.show_durability_bar))
 					this.renderItemDurabilityBar(gg, item, 6, 62 + this.offset, 0.5f);
-				gg.drawCenteredString( this.mc.font, s, 32 + width / 2, 66 + this.offset, -1);
-				gg.pose().scale(2f, 2f, 2f);
+				if(this.settings.getBoolValue(Settings.show_durability_number)){
+					gg.pose().scale(0.5f, 0.5f, 0.5f);
+					gg.drawCenteredString( this.mc.font, s, 32 + width / 2, 66 + this.offset, -1);
+					gg.pose().scale(2f, 2f, 2f);
+				}
 				this.offset += 20;
 
 			} else if (this.settings.getBoolValue(Settings.show_block_count) && item.getItem() instanceof BlockItem) {
@@ -257,7 +262,6 @@ public class HudElementDetailsModern extends HudElementDetailsVanilla {
 				String s = "x " + z;
 				this.renderGuiItemHalfSizeModel(item, 6 + (this.settings.getPositionValue(Settings.item_det_position)[0] * 2), 62 + (this.settings.getPositionValue(Settings.item_det_position)[1] * 2) + this.offset);
 				gg.drawCenteredString( this.mc.font, s, 32 + width / 2, 66 + this.offset, -1);
-				gg.pose().scale(2f, 2f, 2f);
 				this.offset += 20;
 			}
 		}
@@ -297,12 +301,10 @@ public class HudElementDetailsModern extends HudElementDetailsVanilla {
 			}
 			drawRect(gg, 2, 30 + this.offset / 2, 10 + 6 + (width / 2), 10, 0xA0000000);
 			String s = "x " + z;
-			gg.pose().scale(0.5f, 0.5f, 0.5f);
 			if (this.itemArrow == ItemStack.EMPTY)
 				this.itemArrow = new ItemStack(Items.ARROW);
 			this.renderGuiItemHalfSizeModel(this.itemArrow, 6, 62 + this.offset);
 			gg.drawCenteredString( this.mc.font, s, 32 + width / 2, 66 + this.offset, -1);
-			gg.pose().scale(2f, 2f, 2f);
 			this.offset += 20;
 
 		}
