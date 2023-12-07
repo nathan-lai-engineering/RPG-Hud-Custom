@@ -76,6 +76,8 @@ public class HudElementDetailsModern extends HudElementDetailsVanilla {
 			if (this.settings.getBoolValue(Settings.show_item_durability) && item.isDamageableItem()) {
 				String s = (item.getMaxDamage() - item.getDamageValue()) + "/" + item.getMaxDamage();
 				int widthNew = this.mc.font.width(s);
+				if(!this.settings.getBoolValue(Settings.show_durability_number))
+					widthNew = 0;
 				if (widthNew > width)
 					width = widthNew;
 			} else if (this.settings.getBoolValue(Settings.show_block_count) && item.getItem() instanceof BlockItem) {
@@ -99,6 +101,8 @@ public class HudElementDetailsModern extends HudElementDetailsVanilla {
 
 				String s = "x " + z;
 				int widthNew = this.mc.font.width(s);
+				if(!this.settings.getBoolValue(Settings.show_durability_number))
+					widthNew = 0;
 				if (widthNew > width)
 					width = widthNew;
 			}
