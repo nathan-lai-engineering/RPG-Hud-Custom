@@ -19,7 +19,8 @@ public enum HudElementType {
     COMPASS("name.compass"),
     ENTITY_INSPECT("name.entity_inspect"),
     STATUS_EFFECTS("name.status_effects"),
-	MISC("name.misc");
+	MISC("name.misc"),
+    TELDARIA("name.teldaria");
 
 	private String displayName;
 

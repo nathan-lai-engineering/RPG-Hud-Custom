@@ -20,6 +20,7 @@
     "name.entity_inspect": "Entity Inspect",
     "name.status_effects": "Status Effects",
     "name.misc": "Miscellaneous",
+    "name.teldaria": "Teldaria",
     "name.debug": "Debug Settings",
 
     "name.force_render": "Force Rendering",
@@ -79,6 +80,7 @@
     "name.color_system_time" : "System Time Color",
     "name.enable_system_time_background" : "System Time Background",
     "name.debug_number_size" : "Debug number size",
+    "name.teldaria_mode": "Teldaria Mode",
 
     "name.health_percentage": "As Percentage",
     "name.hunger_percentage": "As Percentage",
@@ -160,6 +162,7 @@
 	"tooltip.ENTITY_INSPECT" : "Access the settings of/nthe entity inspection display",
 	"tooltip.STATUS_EFFECTS" : "Access the settings for/nthe status effects",
 	"tooltip.MISC" : "Access miscellaneous settings/nThis contains settings for/nthe fps counter and/nthe system time display",
+    "tooltip.TELDARIA": "Access settings catered to the server, Teldaria",
 	"tooltip.DEBUG" : "Access to debug settings",
 
     "tooltip.color_air": "Set the color of the/nbreath bar",
@@ -203,6 +206,7 @@
     "tooltip.show_entity_armor": "Show the armor value of/nthe entity you are looking at/n(should it have armor)",
     "tooltip.status_vertical": "Render the Status Effect/nicons vertically",
     "tooltip.status_time": "Show a timer for/nthe Status Effects'/nduration",
+    "tooltip.teldaria_mode": "Enable the features to aid Teldaria gameplay",
     
     "tooltip.force_render": "Set this element to be rendered/nregardless if other mods disable it./n /n§cActivate this if another mod/n§cdisables this element",
     "tooltip.render_vanilla": "Force the vanilla version of/nthis element to be rendered instead./n /n§cActivate this if you encounter a/n§cproblem with this element",

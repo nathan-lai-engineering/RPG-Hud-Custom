@@ -114,12 +114,12 @@ public class Settings {
     public static final String status_vertical = "status_vertical";
     public static final String status_position = "pickup_position";
     public static final String status_scale = "status_scale";
+    public static final String teldaria_mode = "teldaria_mode";
 
     public static final String force_render = "force_render";
     public static final String render_vanilla = "render_vanilla";
     public static final String prevent_event = "prevent_event";
     public static final String prevent_element_render = "prevent_element_render";
-    
     //public static final String debug_number_size = "debug_number_size";
     
 
@@ -227,6 +227,8 @@ public class Settings {
         addSetting(level_position, new SettingPosition(level_position, HudElementType.LEVEL, 0, 0));
         addSetting(armor_position, new SettingPosition(armor_position, HudElementType.ARMOR, 0, 0));
 
+        addSetting(teldaria_mode, new SettingBoolean(teldaria_mode, HudElementType.TELDARIA, false));
+
         //addSetting(debug_number_size, new SettingBoolean(debug_number_size, HudElementType.DEBUG, false));
         
         addDebugSettings(HudElementType.ARMOR);
@@ -239,6 +241,7 @@ public class Settings {
         addDebugSettings(HudElementType.HEALTH_MOUNT);
         addDebugSettings(HudElementType.JUMP_BAR);
         addDebugSettings(HudElementType.STATUS_EFFECTS);
+        addDebugSettings(HudElementType.TELDARIA);
     }
 
     public void addDebugSettings(HudElementType type) {
