@@ -38,6 +38,7 @@ public class Settings {
     public static final String show_armor = "show_armor";
     public static final String show_arrow_count = "show_arrow_count";
     public static final String show_item_durability = "show_item_durability";
+    public static final String show_durability_number = "show_durability_number";
     public static final String show_block_count = "show_block_count";
     public static final String show_durability_bar = "show_durability_bar";
     public static final String armor_det_position = "armor_det_position";
@@ -148,6 +149,7 @@ public class Settings {
         addSetting(show_armor, new SettingBoolean(show_armor, HudElementType.DETAILS, true));
         addSetting(show_arrow_count, new SettingBoolean(show_arrow_count, HudElementType.DETAILS, true));
         addSetting(show_item_durability, new SettingBoolean(show_item_durability, HudElementType.DETAILS, true));
+        addSetting(show_durability_number, new SettingBoolean(show_durability_number, HudElementType.DETAILS, true));
         addSetting(show_block_count, new SettingBoolean(show_block_count, HudElementType.DETAILS, true));
         addSetting(show_durability_bar, new SettingBoolean(show_durability_bar, HudElementType.DETAILS, true));
         addSetting(armor_det_position, new SettingPosition(armor_det_position, HudElementType.DETAILS, 0, 0));
