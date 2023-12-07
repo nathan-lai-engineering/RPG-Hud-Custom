@@ -177,11 +177,13 @@ public class HudElementDetailsModern extends HudElementDetailsVanilla {
 	 * @param width the width of the background
 	 */
 	protected void drawArmorDetails(GuiGraphics gg, int width) {
+		boolean reducedSize = this.settings.getBoolValue(Settings.reduce_size);
+		if (reducedSize)
+			gg.pose().scale(0.5f, 0.5f, 0.5f);
 		for (int i = this.mc.player.getInventory().armor.size() - 1; i >= 0; i--) {
 			if (this.mc.player.getInventory().getArmor(i) != ItemStack.EMPTY
 					&& this.mc.player.getInventory().getArmor(i).getItem().isDamageable(null)) {
 				drawRect(gg, 2, 30 + this.offset / 2, 10 + 6 + (width / 2), 10, 0xA0000000);
-				gg.pose().scale(0.5f, 0.5f, 0.5f);
 				ItemStack item = this.mc.player.getInventory().getArmor(i);
 				String s = (item.getMaxDamage() - item.getDamageValue()) + "/" + item.getMaxDamage();
 				this.renderGuiItemHalfSizeModel(item, 6, 62 + this.offset);
