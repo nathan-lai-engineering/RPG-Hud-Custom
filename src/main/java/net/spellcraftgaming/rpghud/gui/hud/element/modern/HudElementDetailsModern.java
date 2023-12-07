@@ -65,6 +65,8 @@ public class HudElementDetailsModern extends HudElementDetailsVanilla {
 				ItemStack item = this.mc.player.getInventory().getArmor(i);
 				String s = (item.getMaxDamage() - item.getDamageValue()) + "/" + item.getMaxDamage();
 				int widthNew = this.mc.font.width(s);
+				if(!this.settings.getBoolValue(Settings.show_durability_number))
+					widthNew = 0;
 				if (widthNew > width)
 					width = widthNew;
 			}
@@ -177,8 +179,7 @@ public class HudElementDetailsModern extends HudElementDetailsVanilla {
 	 * @param width the width of the background
 	 */
 	protected void drawArmorDetails(GuiGraphics gg, int width) {
-		boolean reducedSize = this.settings.getBoolValue(Settings.reduce_size);
-		if (reducedSize)
+		if (this.settings.getBoolValue(Settings.reduce_size))
 			gg.pose().scale(0.5f, 0.5f, 0.5f);
 		for (int i = this.mc.player.getInventory().armor.size() - 1; i >= 0; i--) {
 			if (this.mc.player.getInventory().getArmor(i) != ItemStack.EMPTY
@@ -189,7 +190,8 @@ public class HudElementDetailsModern extends HudElementDetailsVanilla {
 				this.renderGuiItemHalfSizeModel(item, 6, 62 + this.offset);
 				if (this.settings.getBoolValue(Settings.show_durability_bar))
 					this.renderItemDurabilityBar(gg, item, 6, 62 + this.offset, 0.5f);
-				gg.drawCenteredString( this.mc.font, s, 32 + width / 2, 66 + this.offset, -1);
+				if(this.settings.getBoolValue(Settings.show_durability_number))
+					gg.drawCenteredString( this.mc.font, s, 32 + width / 2, 66 + this.offset, -1);
 				gg.pose().scale(2f, 2f, 2f);
 				this.offset += 20;
 			}
