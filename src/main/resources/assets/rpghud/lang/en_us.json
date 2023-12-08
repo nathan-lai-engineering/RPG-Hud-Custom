@@ -81,7 +81,8 @@
     "name.enable_system_time_background" : "System Time Background",
     "name.debug_number_size" : "Debug number size",
     "name.teldaria_mode": "Teldaria Mode",
-    "name.display_repair_instead": "Display Repair Instead",
+    "name.enable_repair_cost": "Enable Repair Cost",
+    "name.repair_position": "Position",
 
     "name.health_percentage": "As Percentage",
     "name.hunger_percentage": "As Percentage",
@@ -208,7 +209,7 @@
     "tooltip.status_vertical": "Render the Status Effect/nicons vertically",
     "tooltip.status_time": "Show a timer for/nthe Status Effects'/nduration",
     "tooltip.teldaria_mode": "Enable the features to aid Teldaria gameplay",
-    "tooltip.display_repair_instead": "Instead of the durability, display the estimated repair cost instead",
+    "tooltip.enable_repair_cost": "Enables the total repair cost display for item details",
     
     "tooltip.force_render": "Set this element to be rendered/nregardless if other mods disable it./n /n§cActivate this if another mod/n§cdisables this element",
     "tooltip.render_vanilla": "Force the vanilla version of/nthis element to be rendered instead./n /n§cActivate this if you encounter a/n§cproblem with this element",
