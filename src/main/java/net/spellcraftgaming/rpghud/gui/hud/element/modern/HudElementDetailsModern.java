@@ -12,6 +12,8 @@ import net.spellcraftgaming.rpghud.gui.hud.element.vanilla.HudElementDetailsVani
 import net.spellcraftgaming.rpghud.main.ModRPGHud;
 import net.spellcraftgaming.rpghud.settings.Settings;
 
+import java.util.Locale;
+
 public class HudElementDetailsModern extends HudElementDetailsVanilla {
 
 	public HudElementDetailsModern() {
@@ -346,11 +348,44 @@ public class HudElementDetailsModern extends HudElementDetailsVanilla {
 			gg.pose().scale(0.5f, 0.5f, 0.5f);
 		drawRect(gg, 2, 60 + this.offset, 20 + 12 + width, 20, 0xA0000000);
 		this.renderGuiItemModel(new ItemStack(Blocks.ANVIL), 6 + this.settings.getPositionValue(Settings.repair_position)[0], 62 + this.settings.getPositionValue(Settings.repair_position)[1] + this.offset, reduceSize);
-		String s = "$100000";
-		gg.drawCenteredString( this.mc.font, s, 6 + width, 66 + this.offset, -1);
+		gg.drawCenteredString( this.mc.font, getRepairString(), 6 + width, 66 + this.offset, -1);
 		this.offset += 20;
 		if (reduceSize)
 			gg.pose().scale(2f, 2f, 2f);
 	}
 
+	protected String getRepairString(){
+		double repairCost = 0;
+		for (int i = this.mc.player.getInventory().armor.size() - 1; i >= 0; i--) {
+			if (this.mc.player.getInventory().getArmor(i) != ItemStack.EMPTY
+					&& this.mc.player.getInventory().getArmor(i).getItem().isDamageable(null)) {
+				ItemStack item = this.mc.player.getInventory().getArmor(i);
+				repairCost += getTierRepairCost(item);
+			}
+		}
+		ItemStack item = this.mc.player.getMainHandItem();
+		if (item != ItemStack.EMPTY) {
+			repairCost += getTierRepairCost(item);
+		}
+
+		String repairCostString = "$" + repairCost;
+		return repairCostString;
+	}
+	protected double getTierRepairCost(ItemStack item){
+		if(item.getShareTag() != null && item.getShareTag().contains("MMOITEMS_DURABILITY") && item.getShareTag().contains("MMOITEMS_MAX_DURABILITY") && item.getShareTag().contains("MMOITEMS_TIER")){
+			int durabilityDamage = Integer.parseInt(item.getTag().get("MMOITEMS_MAX_DURABILITY").getAsString()) - Integer.parseInt(item.getTag().get("MMOITEMS_DURABILITY").getAsString());
+			return durabilityDamage * getTierRepairRate(item.getTag().get("MMOITEMS_TIER").getAsString());
+		}
+		return 0;
+	}
+	protected double getTierRepairRate(String tier){
+        return switch (tier.toLowerCase()) {
+            case "mythic" -> 14.000;
+            case "transcendent" -> 7.500;
+            case "heavenly" -> 4.666;
+            case "legendary" -> 3.333;
+            default -> 0.000;
+        };
+    }
 }
+
