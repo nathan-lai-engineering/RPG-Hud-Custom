@@ -115,6 +115,7 @@ public class Settings {
     public static final String status_position = "pickup_position";
     public static final String status_scale = "status_scale";
     public static final String teldaria_mode = "teldaria_mode";
+    public static final String display_repair_instead = "display_repair_instead";
 
     public static final String force_render = "force_render";
     public static final String render_vanilla = "render_vanilla";
@@ -228,6 +229,7 @@ public class Settings {
         addSetting(armor_position, new SettingPosition(armor_position, HudElementType.ARMOR, 0, 0));
 
         addSetting(teldaria_mode, new SettingBoolean(teldaria_mode, HudElementType.TELDARIA, false));
+        addSetting(display_repair_instead, new SettingBoolean(display_repair_instead, HudElementType.TELDARIA, false));
 
         //addSetting(debug_number_size, new SettingBoolean(debug_number_size, HudElementType.DEBUG, false));
         
