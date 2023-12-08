@@ -1,5 +1,6 @@
 package net.spellcraftgaming.rpghud.gui.hud.element.modern;
 
+import com.mojang.logging.LogUtils;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.item.BlockItem;
@@ -10,6 +11,8 @@ import net.minecraft.world.item.Items;
 import net.spellcraftgaming.rpghud.gui.hud.element.vanilla.HudElementDetailsVanilla;
 import net.spellcraftgaming.rpghud.main.ModRPGHud;
 import net.spellcraftgaming.rpghud.settings.Settings;
+
+import java.util.Iterator;
 
 public class HudElementDetailsModern extends HudElementDetailsVanilla {
 
@@ -56,6 +59,21 @@ public class HudElementDetailsModern extends HudElementDetailsVanilla {
 		}
 	}
 
+	/**
+	 * Gets a displayable durability string from input item, using either Vanilla or Teldaria durability
+	 * @param item
+	 * @return
+	 */
+	private String getDurabilityString(ItemStack item){
+		String durabilityString = (item.getMaxDamage() - item.getDamageValue()) + "/" + item.getMaxDamage();
+		if(this.settings.getBoolValue(Settings.teldaria_mode)){
+			if(item.getShareTag() != null && item.getShareTag().contains("MMOITEMS_DURABILITY") && item.getShareTag().contains("MMOITEMS_MAX_DURABILITY")){
+				durabilityString = item.getTag().get("MMOITEMS_DURABILITY").getAsString() + "/" + item.getTag().get("MMOITEMS_MAX_DURABILITY").getAsString();
+			}
+		}
+		return durabilityString;
+	}
+
 	/** Calculates the width for the element background */
 	private int calculateWidth() {
 		int width = 0;
@@ -63,23 +81,18 @@ public class HudElementDetailsModern extends HudElementDetailsVanilla {
 			if (this.mc.player.getInventory().getArmor(i) != ItemStack.EMPTY
 					&& this.mc.player.getInventory().getArmor(i).getItem().isDamageable(null)) {
 				ItemStack item = this.mc.player.getInventory().getArmor(i);
-				String s = (item.getMaxDamage() - item.getDamageValue()) + "/" + item.getMaxDamage();
-				int widthNew = this.mc.font.width(s);
-				if(!this.settings.getBoolValue(Settings.show_durability_number))
-					widthNew = 0;
-				if (widthNew > width)
-					width = widthNew;
+				if(this.settings.getBoolValue(Settings.show_durability_number)){
+					width = Math.max(width, this.mc.font.width(getDurabilityString(item)));
+				}
 			}
 		}
 		ItemStack item = this.mc.player.getMainHandItem();
 		if (item != ItemStack.EMPTY) {
 			if (this.settings.getBoolValue(Settings.show_item_durability) && item.isDamageableItem()) {
-				String s = (item.getMaxDamage() - item.getDamageValue()) + "/" + item.getMaxDamage();
-				int widthNew = this.mc.font.width(s);
-				if(!this.settings.getBoolValue(Settings.show_durability_number))
-					widthNew = 0;
-				if (widthNew > width)
-					width = widthNew;
+				if(this.settings.getBoolValue(Settings.show_durability_number)){
+					width = Math.max(width, this.mc.font.width(getDurabilityString(item)));
+				}
+
 			} else if (this.settings.getBoolValue(Settings.show_block_count) && item.getItem() instanceof BlockItem) {
 				int x = this.mc.player.getInventory().getContainerSize();
 				int z = 0;
@@ -98,22 +111,19 @@ public class HudElementDetailsModern extends HudElementDetailsVanilla {
 				} else {
 					z = this.count1;
 				}
-
-				String s = "x " + z;
-				int widthNew = this.mc.font.width(s);
-				if(!this.settings.getBoolValue(Settings.show_durability_number))
-					widthNew = 0;
-				if (widthNew > width)
-					width = widthNew;
+				if(this.settings.getBoolValue(Settings.show_durability_number)){
+					String s = "x " + z;
+					width = Math.max(width, this.mc.font.width(s));
+				}
 			}
 		}
 		item = this.mc.player.getOffhandItem();
 		if (item != ItemStack.EMPTY) {
 			if (this.settings.getBoolValue(Settings.show_item_durability) && item.isDamageableItem()) {
-				String s = (item.getMaxDamage() - item.getDamageValue()) + "/" + item.getMaxDamage();
-				int widthNew = this.mc.font.width(s);
-				if (widthNew > width)
-					width = widthNew;
+				if(this.settings.getBoolValue(Settings.show_durability_number)){
+					String s = (item.getMaxDamage() - item.getDamageValue()) + "/" + item.getMaxDamage();
+					width = Math.max(width, this.mc.font.width(s));
+				}
 			} else if (this.settings.getBoolValue(Settings.show_block_count) && item.getItem() instanceof BlockItem) {
 				int x = this.mc.player.getInventory().getContainerSize();
 				int z = 0;
@@ -132,10 +142,10 @@ public class HudElementDetailsModern extends HudElementDetailsVanilla {
 				} else {
 					z = this.count2;
 				}
-				String s = "x " + z;
-				int widthNew = this.mc.font.width(s);
-				if (widthNew > width)
-					width = widthNew;
+				if(this.settings.getBoolValue(Settings.show_durability_number)){
+					String s = "x " + z;
+					width = Math.max(width, this.mc.font.width(s));
+				}
 			}
 		}
 		item = this.mc.player.getMainHandItem();
@@ -162,17 +172,16 @@ public class HudElementDetailsModern extends HudElementDetailsVanilla {
 			} else {
 				z = this.count3;
 			}
-			String s = "x " + z;
-			int widthNew = this.mc.font.width(s);
-			if (widthNew > width)
-				width = widthNew;
+			if(this.settings.getBoolValue(Settings.show_durability_number)){
+				String s = "x " + z;
+				width = Math.max(width, this.mc.font.width(s));
+			}
 		}
 		if (item == ItemStack.EMPTY || item == null) {
 			this.itemMainHandLastArrow = ItemStack.EMPTY;
 		} else {
 			this.itemMainHandLastArrow = item.copy();
 		}
-
 		return width;
 	}
 
@@ -190,13 +199,12 @@ public class HudElementDetailsModern extends HudElementDetailsVanilla {
 					&& this.mc.player.getInventory().getArmor(i).getItem().isDamageable(null)) {
 				drawRect(gg, 2, 30 + this.offset / 2, 10 + 6 + (width / 2), 10, 0xA0000000);
 				ItemStack item = this.mc.player.getInventory().getArmor(i);
-				String s = (item.getMaxDamage() - item.getDamageValue()) + "/" + item.getMaxDamage();
 				this.renderGuiItemHalfSizeModel(item, 6 + (this.settings.getPositionValue(Settings.armor_det_position)[0] * 2), 62 + (this.settings.getPositionValue(Settings.armor_det_position)[1] * 2) + this.offset);
 				if (this.settings.getBoolValue(Settings.show_durability_bar))
 					this.renderItemDurabilityBar(gg, item, 6, 62 + this.offset, 0.5f);
 				if(this.settings.getBoolValue(Settings.show_durability_number)){
 					gg.pose().scale(0.5f, 0.5f, 0.5f);
-					gg.drawCenteredString( this.mc.font, s, 32 + width / 2, 66 + this.offset, -1);
+					gg.drawCenteredString( this.mc.font, getDurabilityString(item), 32 + width / 2, 66 + this.offset, -1);
 					gg.pose().scale(2f, 2f, 2f);
 				}
 				this.offset += 20;
@@ -218,13 +226,12 @@ public class HudElementDetailsModern extends HudElementDetailsVanilla {
 		if (item != ItemStack.EMPTY) {
 			if (this.settings.getBoolValue(Settings.show_item_durability) && item.isDamageableItem()) {
 				drawRect(gg, 2, 30 + this.offset / 2, 10 + 6 + (width / 2), 10, 0xA0000000);
-				String s = (item.getMaxDamage() - item.getDamageValue()) + "/" + item.getMaxDamage();
 				this.renderGuiItemHalfSizeModel(item, 6 + (this.settings.getPositionValue(Settings.item_det_position)[0] * 2), 62 + (this.settings.getPositionValue(Settings.item_det_position)[1] * 2) + this.offset);
 				if (this.settings.getBoolValue(Settings.show_durability_bar))
 					this.renderItemDurabilityBar(gg, item, 6, 62 + this.offset, 0.5f);
 				if(this.settings.getBoolValue(Settings.show_durability_number)){
 					gg.pose().scale(0.5f, 0.5f, 0.5f);
-					gg.drawCenteredString( this.mc.font, s, 32 + width / 2, 66 + this.offset, -1);
+					gg.drawCenteredString( this.mc.font, getDurabilityString(item), 32 + width / 2, 66 + this.offset, -1);
 					gg.pose().scale(2f, 2f, 2f);
 				}
 				this.offset += 20;
