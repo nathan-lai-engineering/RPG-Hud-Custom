@@ -12,7 +12,7 @@ import net.spellcraftgaming.rpghud.gui.hud.element.vanilla.HudElementDetailsVani
 import net.spellcraftgaming.rpghud.main.ModRPGHud;
 import net.spellcraftgaming.rpghud.settings.Settings;
 
-import java.util.Locale;
+import java.text.DecimalFormat;
 
 public class HudElementDetailsModern extends HudElementDetailsVanilla {
 
@@ -346,10 +346,13 @@ public class HudElementDetailsModern extends HudElementDetailsVanilla {
 		boolean reduceSize = this.settings.getBoolValue(Settings.reduce_size);
 		if (reduceSize)
 			gg.pose().scale(0.5f, 0.5f, 0.5f);
-		drawRect(gg, 2, 60 + this.offset, 20 + 12 + width, 20, 0xA0000000);
-		this.renderGuiItemModel(new ItemStack(Blocks.ANVIL), 6 + this.settings.getPositionValue(Settings.repair_position)[0], 62 + this.settings.getPositionValue(Settings.repair_position)[1] + this.offset, reduceSize);
-		gg.drawCenteredString( this.mc.font, getRepairString(), 6 + width, 66 + this.offset, -1);
-		this.offset += 20;
+		String repairCostString = getRepairString();
+		if(repairCostString != null){
+			drawRect(gg, 2, 60 + this.offset, 20 + 12 + width, 20, 0xA0000000);
+			this.renderGuiItemModel(new ItemStack(Blocks.ANVIL), 6 + this.settings.getPositionValue(Settings.repair_position)[0], 62 + this.settings.getPositionValue(Settings.repair_position)[1] + this.offset, reduceSize);
+			gg.drawCenteredString( this.mc.font, repairCostString, 6 + width, 66 + this.offset, -1);
+			this.offset += 20;
+		}
 		if (reduceSize)
 			gg.pose().scale(2f, 2f, 2f);
 	}
@@ -368,7 +371,11 @@ public class HudElementDetailsModern extends HudElementDetailsVanilla {
 			repairCost += getTierRepairCost(item);
 		}
 
-		String repairCostString = "$" + repairCost;
+		String repairCostString = null;
+		if(repairCost > 0){
+			DecimalFormat df = new DecimalFormat("#,##0.00");
+			repairCostString = "$" + df.format(repairCost);
+		}
 		return repairCostString;
 	}
 	protected double getTierRepairCost(ItemStack item){
