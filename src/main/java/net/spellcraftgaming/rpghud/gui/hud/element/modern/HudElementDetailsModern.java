@@ -7,6 +7,7 @@ import net.minecraft.world.item.BowItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Blocks;
 import net.spellcraftgaming.rpghud.gui.hud.element.vanilla.HudElementDetailsVanilla;
 import net.spellcraftgaming.rpghud.main.ModRPGHud;
 import net.spellcraftgaming.rpghud.settings.Settings;
@@ -53,6 +54,13 @@ public class HudElementDetailsModern extends HudElementDetailsVanilla {
 			drawArrowCount(gg, width);
 			gg.pose().translate(-this.settings.getPositionValue(Settings.arrow_det_position)[0],
 					-this.settings.getPositionValue(Settings.arrow_det_position)[1], 0);
+		}
+		if (this.settings.getBoolValue(Settings.enable_repair_cost) && this.settings.getBoolValue(Settings.teldaria_mode)) {
+			gg.pose().translate(this.settings.getPositionValue(Settings.repair_position)[0],
+					this.settings.getPositionValue(Settings.repair_position)[1], 0);
+			drawRepairCost(gg, width);
+			gg.pose().translate(-this.settings.getPositionValue(Settings.repair_position)[0],
+					-this.settings.getPositionValue(Settings.repair_position)[1], 0);
 		}
 	}
 
@@ -324,6 +332,25 @@ public class HudElementDetailsModern extends HudElementDetailsVanilla {
 		} else {
 			this.itemMainHandLastArrow = item.copy();
 		}
+	}
+
+	/**
+	 * Draws the repair cost of the players full loadout on the Teldaria server
+	 *
+	 * @param gg   the GUI to draw on
+	 * @param width the width of the background
+	 */
+	protected void drawRepairCost(GuiGraphics gg, int width){
+		boolean reduceSize = this.settings.getBoolValue(Settings.reduce_size);
+		if (reduceSize)
+			gg.pose().scale(0.5f, 0.5f, 0.5f);
+		drawRect(gg, 2, 60 + this.offset, 20 + 12 + width, 20, 0xA0000000);
+		this.renderGuiItemModel(new ItemStack(Blocks.ANVIL), 6 + this.settings.getPositionValue(Settings.repair_position)[0], 62 + this.settings.getPositionValue(Settings.repair_position)[1] + this.offset, reduceSize);
+		String s = "$100000";
+		gg.drawCenteredString( this.mc.font, s, 6 + width, 66 + this.offset, -1);
+		this.offset += 20;
+		if (reduceSize)
+			gg.pose().scale(2f, 2f, 2f);
 	}
 
 }
