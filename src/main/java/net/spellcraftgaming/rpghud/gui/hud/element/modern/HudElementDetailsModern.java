@@ -379,16 +379,29 @@ public class HudElementDetailsModern extends HudElementDetailsVanilla {
 		return repairCostString;
 	}
 	protected double getTierRepairCost(ItemStack item){
-		if(item.getShareTag() != null && item.getShareTag().contains("MMOITEMS_DURABILITY") && item.getShareTag().contains("MMOITEMS_MAX_DURABILITY") && item.getShareTag().contains("MMOITEMS_TIER")){
+		if(item.getShareTag() != null && item.getShareTag().contains("MMOITEMS_DURABILITY")
+				&& item.getShareTag().contains("MMOITEMS_MAX_DURABILITY")
+				&& item.getShareTag().contains("MMOITEMS_TIER")
+				&& item.getShareTag().contains("MMOITEMS_ITEM_TYPE")){
 			int durabilityDamage = Integer.parseInt(item.getTag().get("MMOITEMS_MAX_DURABILITY").getAsString()) - Integer.parseInt(item.getTag().get("MMOITEMS_DURABILITY").getAsString());
-			return durabilityDamage * getTierRepairRate(item.getTag().get("MMOITEMS_TIER").getAsString());
+			return durabilityDamage * getTierRepairRate(item.getTag().get("MMOITEMS_TIER").getAsString(), item.getTag().get("MMOITEMS_ITEM_TYPE").getAsString());
 		}
 		return 0;
 	}
-	protected double getTierRepairRate(String tier){
+	protected double getTierRepairRate(String tier, String type){
+
+		if(type.equalsIgnoreCase("tool")){
+			return switch (tier.toLowerCase()) {
+				case "mythic" -> 2.333;
+				case "transcendent" -> 1.25;
+				case "heavenly" -> 0.777;
+				case "legendary" -> 0.555;
+				default -> 0.000;
+			};
+		}
         return switch (tier.toLowerCase()) {
-            case "mythic" -> 14.000;
-            case "transcendent" -> 7.500;
+            case "mythic" -> 14.0;
+            case "transcendent" -> 7.5;
             case "heavenly" -> 4.666;
             case "legendary" -> 3.333;
             default -> 0.000;
