@@ -207,7 +207,10 @@ public class HudElementDetailsModern extends HudElementDetailsVanilla {
 					&& this.mc.player.getInventory().getArmor(i).getItem().isDamageable(null)) {
 				drawRect(gg, 2, 60 + this.offset, 20 + 12 + width, 20, 0xA0000000);
 				ItemStack item = this.mc.player.getInventory().getArmor(i);
-				this.renderGuiItemModel(item, 6 + this.settings.getPositionValue(Settings.armor_det_position)[0], 62 + this.settings.getPositionValue(Settings.armor_det_position)[1] + this.offset, reduceSize);
+				if(reduceSize)
+					this.renderGuiItemModel(item, 7 + this.settings.getPositionValue(Settings.armor_det_position)[0], 35 + this.settings.getPositionValue(Settings.armor_det_position)[1] + this.offset / 2, true);
+				else
+					this.renderGuiItemModel(item, 14 + this.settings.getPositionValue(Settings.armor_det_position)[0], 70 + this.settings.getPositionValue(Settings.armor_det_position)[1] + this.offset, false);
 				if (this.settings.getBoolValue(Settings.show_durability_bar))
 					this.renderItemDurabilityBar(gg, item, 6, 62 + this.offset, 1f);
 				if(this.settings.getBoolValue(Settings.show_durability_number)){
@@ -235,7 +238,10 @@ public class HudElementDetailsModern extends HudElementDetailsVanilla {
 		if (item != ItemStack.EMPTY) {
 			if (this.settings.getBoolValue(Settings.show_item_durability) && item.isDamageableItem()) {
 				drawRect(gg, 2, 60 + this.offset, 20 + 12 + width, 20, 0xA0000000);
-				this.renderGuiItemModel(item, 6 + this.settings.getPositionValue(Settings.item_det_position)[0], 62 + this.settings.getPositionValue(Settings.item_det_position)[1] + this.offset, reduceSize);
+				if(reduceSize)
+					this.renderGuiItemModel(item, 7 + this.settings.getPositionValue(Settings.item_det_position)[0], 35 + this.settings.getPositionValue(Settings.item_det_position)[1] + this.offset / 2, true);
+				else
+					this.renderGuiItemModel(item, 14 + this.settings.getPositionValue(Settings.item_det_position)[0], 70 + this.settings.getPositionValue(Settings.item_det_position)[1] + this.offset, false);
 				if (this.settings.getBoolValue(Settings.show_durability_bar))
 					this.renderItemDurabilityBar(gg, item, 6, 62 + this.offset, 1f);
 				if(this.settings.getBoolValue(Settings.show_durability_number)){
@@ -278,7 +284,10 @@ public class HudElementDetailsModern extends HudElementDetailsVanilla {
 				item = this.mc.player.getItemInHand(hand);
 				drawRect(gg, 2, 60 + this.offset, 20 + 12 + width, 20, 0xA0000000);
 				String s = "x " + z;
-				this.renderGuiItemModel(item, 6 + this.settings.getPositionValue(Settings.item_det_position)[0], 62 + this.settings.getPositionValue(Settings.item_det_position)[1] + this.offset, reduceSize);
+				if(reduceSize)
+					this.renderGuiItemModel(item, 7 + this.settings.getPositionValue(Settings.item_det_position)[0], 35 + this.settings.getPositionValue(Settings.item_det_position)[1] + this.offset / 2, true);
+				else
+					this.renderGuiItemModel(item, 14 + this.settings.getPositionValue(Settings.item_det_position)[0], 70 + this.settings.getPositionValue(Settings.item_det_position)[1] + this.offset, false);
 				gg.drawCenteredString( this.mc.font, s, 6 + width, 66 + this.offset, -1);
 				this.offset += 20;
 			}
@@ -324,7 +333,10 @@ public class HudElementDetailsModern extends HudElementDetailsVanilla {
 			String s = "x " + z;
 			if (this.itemArrow == ItemStack.EMPTY)
 				this.itemArrow = new ItemStack(Items.ARROW);
-			this.renderGuiItemModel(this.itemArrow, 6 + this.settings.getPositionValue(Settings.item_det_position)[0], 62 + this.settings.getPositionValue(Settings.armor_det_position)[1] + this.offset, reduceSize);
+			if(reduceSize)
+				this.renderGuiItemModel(this.itemArrow, 7 + this.settings.getPositionValue(Settings.item_det_position)[0], 35 + this.settings.getPositionValue(Settings.item_det_position)[1] + this.offset / 2, true);
+			else
+				this.renderGuiItemModel(this.itemArrow, 14 + this.settings.getPositionValue(Settings.item_det_position)[0], 70 + this.settings.getPositionValue(Settings.item_det_position)[1] + this.offset, false);
 			gg.drawCenteredString( this.mc.font, s, 6 + width, 66 + this.offset, -1);
 			this.offset += 20;
 
@@ -349,7 +361,10 @@ public class HudElementDetailsModern extends HudElementDetailsVanilla {
 		String repairCostString = getRepairString();
 		if(repairCostString != null){
 			drawRect(gg, 2, 60 + this.offset, 20 + 12 + width, 20, 0xA0000000);
-			this.renderGuiItemModel(new ItemStack(Blocks.ANVIL), 6 + this.settings.getPositionValue(Settings.repair_position)[0], 62 + this.settings.getPositionValue(Settings.repair_position)[1] + this.offset, reduceSize);
+			if(reduceSize)
+				this.renderGuiItemModel(new ItemStack(Blocks.ANVIL), 7 + this.settings.getPositionValue(Settings.repair_position)[0], 35 + this.settings.getPositionValue(Settings.repair_position)[1] + this.offset / 2, true);
+			else
+				this.renderGuiItemModel(new ItemStack(Blocks.ANVIL), 14 + this.settings.getPositionValue(Settings.repair_position)[0], 70 + this.settings.getPositionValue(Settings.repair_position)[1] + this.offset, false);
 			gg.drawCenteredString( this.mc.font, repairCostString, 6 + width, 66 + this.offset, -1);
 			this.offset += 20;
 		}

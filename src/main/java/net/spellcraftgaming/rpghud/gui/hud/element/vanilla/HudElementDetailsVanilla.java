@@ -292,9 +292,7 @@ public class HudElementDetailsVanilla extends HudElement {
 		RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
 		PoseStack PoseStack = RenderSystem.getModelViewStack();
 		PoseStack.pushPose();
-		if(halfSize) PoseStack.translate(x * 0.5f - 4, y * 0.5f - 4, (100.0F));
-		else PoseStack.translate(x, y, (100.0F));
-		PoseStack.translate(8.0D, 8.0D, 0.0D);
+		PoseStack.translate(x, y, (100.0F));
 		PoseStack.scale(1.0F, -1.0F, 1.0F);
 		if(halfSize) PoseStack.scale(0.5f, 0.5f, 0.5f);
 		PoseStack.scale(16.0F, 16.0F, 16.0F);
