@@ -29,12 +29,8 @@ public class HudElementClockVanilla extends HudElement {
 		if (this.settings.getBoolValue(Settings.enable_clock_color)) {
 			clockColor = getClockColor();
 		}
-		if (this.settings.getBoolValue(Settings.reduce_size))
-			gg.pose().scale(0.5f, 0.5f, 0.5f);
-		gg.drawString(this.mc.font, getTime(), (this.settings.getBoolValue(Settings.reduce_size) ? 8 : 4) + this.settings.getPositionValue(Settings.clock_position)[0], (this.settings.getBoolValue(Settings.reduce_size) ? 104 : 52) + this.settings.getPositionValue(Settings.clock_position)[1], clockColor);
+		gg.drawString(this.mc.font, getTime(), (4) + this.settings.getPositionValue(Settings.clock_position)[0], (52) + this.settings.getPositionValue(Settings.clock_position)[1], clockColor);
 		RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, 1.0F);
-		if (this.settings.getBoolValue(Settings.reduce_size))
-			gg.pose().scale(2f, 2f, 2f);
 	}
 
 	/** Returns the time of the minecraft world as a String */
