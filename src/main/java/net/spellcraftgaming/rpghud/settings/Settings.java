@@ -140,7 +140,7 @@ public class Settings {
     }
 
     public void init() {
-        addSetting(hud_type, new SettingHudType(hud_type, "vanilla"));
+        addSetting(hud_type, new SettingHudType(hud_type, "simple"));
         addSetting(enable_button_tooltip, new SettingBoolean(enable_button_tooltip, true));
         // addSetting(show_update_notification, new
         // SettingBoolean(show_update_notification, true));

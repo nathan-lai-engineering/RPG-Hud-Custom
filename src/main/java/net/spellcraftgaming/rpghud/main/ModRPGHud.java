@@ -54,16 +54,16 @@ public class ModRPGHud {
 	private void setup(final FMLCommonSetupEvent event)
 	{
 		this.settings = new Settings();
-		this.registerHud(new HudVanilla(Minecraft.getInstance(), "vanilla", "Vanilla"));
+		//this.registerHud(new HudVanilla(Minecraft.getInstance(), "vanilla", "Vanilla"));
 		this.registerHud(new HudSimple(Minecraft.getInstance(), "simple", "Simplified"));
-		this.registerHud(new HudDefault(Minecraft.getInstance(), "default", "Default"));
-		this.registerHud(new HudExtendedWidget(Minecraft.getInstance(), "extended", "Extended Widget"));
-		this.registerHud(new HudFullTexture(Minecraft.getInstance(), "texture", "Full Texture"));
-		this.registerHud(new HudHotbarWidget(Minecraft.getInstance(), "hotbar", "Hotbar Widget"));
-		this.registerHud(new HudModern(Minecraft.getInstance(), "modern", "Modern Style"));
+		//this.registerHud(new HudDefault(Minecraft.getInstance(), "default", "Default"));
+		//this.registerHud(new HudExtendedWidget(Minecraft.getInstance(), "extended", "Extended Widget"));
+		//this.registerHud(new HudFullTexture(Minecraft.getInstance(), "texture", "Full Texture"));
+		//this.registerHud(new HudHotbarWidget(Minecraft.getInstance(), "hotbar", "Hotbar Widget"));
+		//this.registerHud(new HudModern(Minecraft.getInstance(), "modern", "Modern Style"));
 
 		if (!isHudKeyValid(this.settings.getStringValue(Settings.hud_type))) {
-			this.settings.setSetting(Settings.hud_type, "vanilla");
+			this.settings.setSetting(Settings.hud_type, "simple");
 		}
 	}
 
