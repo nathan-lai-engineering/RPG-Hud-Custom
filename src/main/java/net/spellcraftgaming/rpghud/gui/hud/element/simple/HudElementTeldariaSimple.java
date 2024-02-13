@@ -5,13 +5,26 @@ import net.minecraft.world.item.ItemStack;
 import net.spellcraftgaming.rpghud.gui.hud.element.HudElement;
 import net.spellcraftgaming.rpghud.gui.hud.element.HudElementType;
 import net.spellcraftgaming.rpghud.settings.Settings;
+import org.lwjgl.system.SharedLibrary;
+
 public class HudElementTeldariaSimple extends HudElement{
+    public static final String DEFENSE = "defense";
+    public static final String DEFENSE_STAT = "[\uD83D\uDEE1] Defense";
     public static final String DEFENSE_TAG = "MMOITEMS_DEFENSE";
+
+    public static final String BLOCK = "block";
+    public static final String BLOCK_STAT = "[\uD83D\uDD30] Block";
     public static final String BLOCK_RATE_TAG = "MMOITEM_BLOCK_RATING";
     public static final String BLOCK_POWER_TAG = "MMOITEMS_BLOCK_POWER";
-    public static final String ATTACK_TAG = "MMOITEMS_ATTACK_DAMAGE";
+
+    public static final String DAMAGE = "damage";
+    public static final String DAMAGE_STAT = "[⚔] Damage";
+    public static final String DAMAGE_TAG = "MMOITEMS_ATTACK_DAMAGE";
+
+    public static final String CRIT = "crit";
+    public static final String CRIT_STAT = "[⚒] Crit";
     public static final String CRIT_CHANCE_TAG = "MMOITEMS_CRITICAL_STRIKE_CHANCE";
-    public static final String CRIT_DAMAGE_TAG = "HSTAY_CRITICAL_STRIKE_POWER";
+    public static final String CRIT_DAMAGE_TAG = "MMOITEMS_CRITICAL_STRIKE_POWER";
     public static final double BASE_CRITICAL_STRIKE_POWER = 110.0;
     public HudElementTeldariaSimple(){
         super(HudElementType.TELDARIA, 0, 0, 0, 0, true);
@@ -27,16 +40,35 @@ public class HudElementTeldariaSimple extends HudElement{
         }
     }
 
+    /**
+     * Gets width of largest stat string
+     * @return
+     */
     private int calculateWidth() {
         int width = 0;
+        width = Math.max(width, this.mc.font.width(getStatString(DEFENSE)));
+        width = Math.max(width, this.mc.font.width(getStatString(BLOCK)));
+        width = Math.max(width, this.mc.font.width(getStatString(DAMAGE)));
+        width = Math.max(width, this.mc.font.width(getStatString(CRIT)));
         return width;
     }
     protected void drawTStatBox(GuiGraphics gg, int width){
 
     }
+
+    /**
+     * Creates a string for a specific stat
+     * @param statName
+     * @return
+     */
     private String getStatString(String statName){
-        String statString = "";
-        return statString;
+        return switch(statName){
+            case DEFENSE -> String.format("%s: %.2f", DEFENSE_STAT, getStat(DEFENSE_TAG));
+            case BLOCK -> String.format("%s: %.2f%% / %.2f%%", BLOCK_STAT, getStat(BLOCK_RATE_TAG), getStat(BLOCK_POWER_TAG));
+            case DAMAGE -> String.format("%s: %.2f", DAMAGE_STAT, getStat(DAMAGE_TAG));
+            case CRIT -> String.format("%s: %.2f%% / %.2f%%", CRIT_STAT, getStat(CRIT_CHANCE_TAG), getStat(CRIT_DAMAGE_TAG));
+            default -> "";
+        };
     }
 
     /**
