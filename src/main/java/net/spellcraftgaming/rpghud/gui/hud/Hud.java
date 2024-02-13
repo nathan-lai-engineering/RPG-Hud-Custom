@@ -16,6 +16,7 @@ import static net.spellcraftgaming.rpghud.gui.hud.element.HudElementType.LEVEL;
 import static net.spellcraftgaming.rpghud.gui.hud.element.HudElementType.MISC;
 import static net.spellcraftgaming.rpghud.gui.hud.element.HudElementType.STATUS_EFFECTS;
 import static net.spellcraftgaming.rpghud.gui.hud.element.HudElementType.WIDGET;
+import static net.spellcraftgaming.rpghud.gui.hud.element.HudElementType.TELDARIA;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -67,6 +68,7 @@ public abstract class Hud {
 		this.elements.put(ENTITY_INSPECT, setElementEntityInspect());
 	    this.elements.put(STATUS_EFFECTS, setElementMobEffects());
 	    this.elements.put(MISC, setElementMisc());
+		this.elements.put(TELDARIA, setElementTeldaria());
 
 	}
 
@@ -127,6 +129,7 @@ public abstract class Hud {
 	protected abstract HudElement setElementEntityInspect();
 
     protected abstract HudElement setElementMobEffects();
+	protected abstract HudElement setElementTeldaria();
     
     protected abstract HudElement setElementMisc();
 	/**

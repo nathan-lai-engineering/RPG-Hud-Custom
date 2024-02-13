@@ -3,6 +3,7 @@ package net.spellcraftgaming.rpghud.gui.hud;
 import net.minecraft.client.Minecraft;
 import net.spellcraftgaming.rpghud.gui.hud.element.HudElement;
 import net.spellcraftgaming.rpghud.gui.hud.element.HudElementEmpty;
+import net.spellcraftgaming.rpghud.gui.hud.element.simple.HudElementTeldariaSimple;
 import net.spellcraftgaming.rpghud.gui.hud.element.vanilla.HudElementClockVanilla;
 import net.spellcraftgaming.rpghud.gui.hud.element.vanilla.HudElementCompassVanilla;
 import net.spellcraftgaming.rpghud.gui.hud.element.vanilla.HudElementDetailsVanilla;
@@ -95,4 +96,6 @@ public class HudVanilla extends Hud {
 	protected HudElement setElementMisc() {
 		return new HudElementMiscVanilla();
 	}
+	@Override
+	protected HudElement setElementTeldaria() { return new HudElementTeldariaSimple(); }
 }
