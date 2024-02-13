@@ -304,6 +304,8 @@ public class HudElementDetailsModern extends HudElementDetailsVanilla {
 	 */
 	protected void drawArrowCount(GuiGraphics gg, int width) {
 		boolean reduceSize = this.settings.getBoolValue(Settings.reduce_size);
+		if (reduceSize)
+			gg.pose().scale(0.5f, 0.5f, 0.5f);
 		ItemStack item = this.mc.player.getMainHandItem();
 		if (this.settings.getBoolValue(Settings.show_arrow_count) && item != ItemStack.EMPTY
 				&& this.mc.player.getMainHandItem().getItem() instanceof BowItem) {
@@ -346,6 +348,8 @@ public class HudElementDetailsModern extends HudElementDetailsVanilla {
 		} else {
 			this.itemMainHandLastArrow = item.copy();
 		}
+		if (reduceSize)
+			gg.pose().scale(2f, 2f, 2f);
 	}
 
 	/**
