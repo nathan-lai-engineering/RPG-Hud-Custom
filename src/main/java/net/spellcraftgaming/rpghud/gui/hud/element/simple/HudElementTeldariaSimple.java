@@ -20,20 +20,20 @@ import java.util.Map;
 
 public class HudElementTeldariaSimple extends HudElement{
     public static final String DEFENSE = "defense";
-    public static final String DEFENSE_STAT = "[\uD83D\uDEE1] Defense";
+    public static final String DEFENSE_STAT = "[§a\uD83D\uDEE1§f] §eDefense";
     public static final String DEFENSE_TAG = "MMOITEMS_DEFENSE";
 
     public static final String BLOCK = "block";
-    public static final String BLOCK_STAT = "[\uD83D\uDD30] Block";
+    public static final String BLOCK_STAT = "[§a\uD83D\uDD30§f] §eBlock";
     public static final String BLOCK_RATE_TAG = "MMOITEMS_BLOCK_RATING";
     public static final String BLOCK_POWER_TAG = "MMOITEMS_BLOCK_POWER";
 
     public static final String DAMAGE = "damage";
-    public static final String DAMAGE_STAT = "[⚔] Damage";
+    public static final String DAMAGE_STAT = "[§a⚔§f] §eDamage";
     public static final String DAMAGE_TAG = "MMOITEMS_ATTACK_DAMAGE";
 
     public static final String CRIT = "crit";
-    public static final String CRIT_STAT = "[⚒] Crit";
+    public static final String CRIT_STAT = "[§a⚒§f] §eCrit";
     public static final String CRIT_CHANCE_TAG = "MMOITEMS_CRITICAL_STRIKE_CHANCE";
     public static final String CRIT_DAMAGE_TAG = "MMOITEMS_CRITICAL_STRIKE_POWER";
     public static final double BASE_CRITICAL_STRIKE_POWER = 105.0;
@@ -78,7 +78,7 @@ public class HudElementTeldariaSimple extends HudElement{
 
         drawRect(gg, 0, 0, 6 + width, 6 + (15 * 5), 0xA0000000);
 
-        gg.drawCenteredString( this.mc.font, "Gear Stats", 3 + width / 2, 3 + 5 + tstatOffset, 0x55FF55);
+        gg.drawCenteredString( this.mc.font, "§6Gear Stats", 3 + width / 2, 3 + 5 + tstatOffset, -1);
         tstatOffset += 15;
 
         gg.drawString( this.mc.font, getStatString(DEFENSE), 3, 3 + 5 + tstatOffset, -1);
@@ -104,10 +104,10 @@ public class HudElementTeldariaSimple extends HudElement{
      */
     private String getStatString(String statName){
         return switch(statName){
-            case DEFENSE -> String.format("%s: %.1f", DEFENSE_STAT, getStat(DEFENSE_TAG));
-            case BLOCK -> String.format("%s: %.1f%% | %.1f%%", BLOCK_STAT, getStat(BLOCK_RATE_TAG), getStat(BLOCK_POWER_TAG));
-            case DAMAGE -> String.format("%s: %.1f", DAMAGE_STAT, getStat(DAMAGE_TAG));
-            case CRIT -> String.format("%s: %.1f%% | %.1f%%", CRIT_STAT, getStat(CRIT_CHANCE_TAG), getStat(CRIT_DAMAGE_TAG) + BASE_CRITICAL_STRIKE_POWER);
+            case DEFENSE -> String.format("%s: §f%.1f", DEFENSE_STAT, getStat(DEFENSE_TAG));
+            case BLOCK -> String.format("%s: §f%.1f%% §e| §f%.1f%%", BLOCK_STAT, getStat(BLOCK_RATE_TAG), getStat(BLOCK_POWER_TAG));
+            case DAMAGE -> String.format("%s: §f%.1f", DAMAGE_STAT, getStat(DAMAGE_TAG));
+            case CRIT -> String.format("%s: §f%.1f%% §e| §f%.1f%%", CRIT_STAT, getStat(CRIT_CHANCE_TAG), getStat(CRIT_DAMAGE_TAG) + BASE_CRITICAL_STRIKE_POWER);
             default -> "";
         };
     }
