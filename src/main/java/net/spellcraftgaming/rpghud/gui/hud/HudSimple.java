@@ -6,13 +6,7 @@ import net.spellcraftgaming.rpghud.gui.hud.element.modern.HudElementAirModern;
 import net.spellcraftgaming.rpghud.gui.hud.element.modern.HudElementCompassModern;
 import net.spellcraftgaming.rpghud.gui.hud.element.modern.HudElementDetailsModern;
 import net.spellcraftgaming.rpghud.gui.hud.element.modern.HudElementEntityInspectModern;
-import net.spellcraftgaming.rpghud.gui.hud.element.simple.HudElementArmorSimple;
-import net.spellcraftgaming.rpghud.gui.hud.element.simple.HudElementExperienceSimple;
-import net.spellcraftgaming.rpghud.gui.hud.element.simple.HudElementFoodSimple;
-import net.spellcraftgaming.rpghud.gui.hud.element.simple.HudElementHealthMountSimple;
-import net.spellcraftgaming.rpghud.gui.hud.element.simple.HudElementHealthSimple;
-import net.spellcraftgaming.rpghud.gui.hud.element.simple.HudElementHotbarSimple;
-import net.spellcraftgaming.rpghud.gui.hud.element.simple.HudElementLevelSimple;
+import net.spellcraftgaming.rpghud.gui.hud.element.simple.*;
 
 public class HudSimple extends HudVanilla{
 
@@ -73,6 +67,5 @@ public class HudSimple extends HudVanilla{
 	protected HudElement setElementEntityInspect() {
 		return new HudElementEntityInspectModern();
 	}
-	
-	
+
 }

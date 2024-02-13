@@ -52,6 +52,7 @@ public class RenderOverlay implements IGuiOverlay{
             this.drawElement(HudElementType.HOTBAR, gg, partialTicks);
         }
         this.drawElement(HudElementType.MISC, gg, partialTicks);
+        this.drawElement(HudElementType.TELDARIA, gg, partialTicks);
 	}
 	
     @SubscribeEvent

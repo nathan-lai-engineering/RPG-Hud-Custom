@@ -14,7 +14,7 @@ public class HudElementTeldariaSimple extends HudElement{
 
     public static final String BLOCK = "block";
     public static final String BLOCK_STAT = "[\uD83D\uDD30] Block";
-    public static final String BLOCK_RATE_TAG = "MMOITEM_BLOCK_RATING";
+    public static final String BLOCK_RATE_TAG = "MMOITEMS_BLOCK_RATING";
     public static final String BLOCK_POWER_TAG = "MMOITEMS_BLOCK_POWER";
 
     public static final String DAMAGE = "damage";
@@ -26,16 +26,19 @@ public class HudElementTeldariaSimple extends HudElement{
     public static final String CRIT_CHANCE_TAG = "MMOITEMS_CRITICAL_STRIKE_CHANCE";
     public static final String CRIT_DAMAGE_TAG = "MMOITEMS_CRITICAL_STRIKE_POWER";
     public static final double BASE_CRITICAL_STRIKE_POWER = 110.0;
+
+    protected int tstatOffset = 0;
     public HudElementTeldariaSimple(){
         super(HudElementType.TELDARIA, 0, 0, 0, 0, true);
     }
     public void drawElement(GuiGraphics gg, float zLevel, float partialTicks, int scaledWidth, int scaledHeight){
-        boolean reduceSize = this.settings.getBoolValue(Settings.reduce_size);
-        if (reduceSize)
-            gg.pose().scale(0.5f, 0.5f, 0.5f);
         if(this.settings.getBoolValue(Settings.teldaria_mode)){
             if(this.settings.getBoolValue(Settings.enable_tstats)){
-
+                gg.pose().translate(this.settings.getPositionValue(Settings.tstats_position)[0],
+                        this.settings.getPositionValue(Settings.tstats_position)[1], 0);
+                drawTStatBox(gg);
+                gg.pose().translate(-this.settings.getPositionValue(Settings.tstats_position)[0],
+                        -this.settings.getPositionValue(Settings.tstats_position)[1], 0);
             }
         }
     }
@@ -52,8 +55,29 @@ public class HudElementTeldariaSimple extends HudElement{
         width = Math.max(width, this.mc.font.width(getStatString(CRIT)));
         return width;
     }
-    protected void drawTStatBox(GuiGraphics gg, int width){
+    protected void drawTStatBox(GuiGraphics gg){
+        tstatOffset = 0;
+        boolean reduceSize = this.settings.getBoolValue(Settings.reduce_size);
+        if (reduceSize)
+            gg.pose().scale(0.5f, 0.5f, 0.5f);
+        int width = calculateWidth();
 
+        drawRect(gg, 0, 0, 12 + width, 12 + (20 * 4), 0xA0000000);
+
+        gg.drawCenteredString( this.mc.font, getStatString(DEFENSE), 6 + width / 2, 6 + 5 + tstatOffset, -1);
+        tstatOffset += 20;
+
+        gg.drawCenteredString( this.mc.font, getStatString(BLOCK), 6 + width / 2, 6 + 5 + tstatOffset, -1);
+        tstatOffset += 20;
+
+        gg.drawCenteredString( this.mc.font, getStatString(DAMAGE), 6 + width / 2, 6 + 5 + tstatOffset, -1);
+        tstatOffset += 20;
+
+        gg.drawCenteredString( this.mc.font, getStatString(CRIT), 6 + width / 2, 6 + 5 + tstatOffset, -1);
+        tstatOffset += 20;
+
+        if (reduceSize)
+            gg.pose().scale(2f, 2f, 2f);
     }
 
     /**
@@ -63,10 +87,10 @@ public class HudElementTeldariaSimple extends HudElement{
      */
     private String getStatString(String statName){
         return switch(statName){
-            case DEFENSE -> String.format("%s: %.2f", DEFENSE_STAT, getStat(DEFENSE_TAG));
-            case BLOCK -> String.format("%s: %.2f%% / %.2f%%", BLOCK_STAT, getStat(BLOCK_RATE_TAG), getStat(BLOCK_POWER_TAG));
+            case DEFENSE -> String.format("%s: %.1f", DEFENSE_STAT, getStat(DEFENSE_TAG));
+            case BLOCK -> String.format("%s: %.1f%% | %.1f%%", BLOCK_STAT, getStat(BLOCK_RATE_TAG), getStat(BLOCK_POWER_TAG));
             case DAMAGE -> String.format("%s: %.2f", DAMAGE_STAT, getStat(DAMAGE_TAG));
-            case CRIT -> String.format("%s: %.2f%% / %.2f%%", CRIT_STAT, getStat(CRIT_CHANCE_TAG), getStat(CRIT_DAMAGE_TAG));
+            case CRIT -> String.format("%s: %.1f%% | %.1f%%", CRIT_STAT, getStat(CRIT_CHANCE_TAG), getStat(CRIT_DAMAGE_TAG));
             default -> "";
         };
     }
@@ -86,12 +110,11 @@ public class HudElementTeldariaSimple extends HudElement{
                     stat += Double.parseDouble(item.getTag().get(statName).getAsString());
                 }
             }
-
-            if (this.mc.player.getMainHandItem() != ItemStack.EMPTY) {
-                ItemStack item = this.mc.player.getMainHandItem();
-                if(item.getShareTag() != null && item.getShareTag().contains(statName)){
-                    stat += Double.parseDouble(item.getTag().get(statName).getAsString());
-                }
+        }
+        if (this.mc.player.getMainHandItem() != ItemStack.EMPTY) {
+            ItemStack item = this.mc.player.getMainHandItem();
+            if(item.getShareTag() != null && item.getShareTag().contains(statName)){
+                stat += Double.parseDouble(item.getTag().get(statName).getAsString());
             }
         }
         return stat;
