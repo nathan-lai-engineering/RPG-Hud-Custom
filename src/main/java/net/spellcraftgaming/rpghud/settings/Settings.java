@@ -117,6 +117,8 @@ public class Settings {
     public static final String teldaria_mode = "teldaria_mode";
     public static final String enable_repair_cost = "enable_repair_cost";
     public static final String repair_position = "repair_position";
+    public static final String enable_tstats = "enable_tstats";
+    public static final String tstats_position = "tstats_position";
 
     public static final String force_render = "force_render";
     public static final String render_vanilla = "render_vanilla";
@@ -232,6 +234,8 @@ public class Settings {
         addSetting(teldaria_mode, new SettingBoolean(teldaria_mode, HudElementType.TELDARIA, false));
         addSetting(enable_repair_cost, new SettingBoolean(enable_repair_cost, HudElementType.TELDARIA, false));
         addSetting(repair_position, new SettingPosition(repair_position, HudElementType.TELDARIA, 0, 0));
+        addSetting(enable_tstats, new SettingBoolean(enable_tstats, HudElementType.TELDARIA, true));
+        addSetting(tstats_position, new SettingPosition(tstats_position, HudElementType.TELDARIA, 0, 0));
 
         //addSetting(debug_number_size, new SettingBoolean(debug_number_size, HudElementType.DEBUG, false));
         
