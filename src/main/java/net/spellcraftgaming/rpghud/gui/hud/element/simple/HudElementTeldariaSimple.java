@@ -140,7 +140,7 @@ public class HudElementTeldariaSimple extends HudElement{
         if (this.mc.player.getMainHandItem() != ItemStack.EMPTY) {
             ItemStack item = this.mc.player.getMainHandItem();
             if(item.getShareTag() != null && item.getShareTag().contains(statTag)){
-                stat += Double.parseDouble(item.getTag().get(statTag).getAsString());
+                stat += Double.parseDouble(item.getTag().get(statTag).getAsString()) - 1;
             }
             else if(statTag.equals(DAMAGE_TAG)){
                 double itemAttack = 0;
