@@ -62,6 +62,7 @@ public class HudElementTeldariaSimple extends HudElement{
      */
     private int calculateWidth() {
         int width = 0;
+        width = Math.max(width, this.mc.font.width("Gear Stats"));
         width = Math.max(width, this.mc.font.width(getStatString(DEFENSE)));
         width = Math.max(width, this.mc.font.width(getStatString(BLOCK)));
         width = Math.max(width, this.mc.font.width(getStatString(DAMAGE)));
@@ -75,19 +76,22 @@ public class HudElementTeldariaSimple extends HudElement{
             gg.pose().scale(0.5f, 0.5f, 0.5f);
         int width = calculateWidth();
 
-        drawRect(gg, 0, 0, 12 + width, 12 + (20 * 4), 0xA0000000);
+        drawRect(gg, 0, 0, 6 + width, 6 + (15 * 5), 0xA0000000);
 
-        gg.drawCenteredString( this.mc.font, getStatString(DEFENSE), 6 + width / 2, 6 + 5 + tstatOffset, -1);
-        tstatOffset += 20;
+        gg.drawCenteredString( this.mc.font, "Gear Stats", 3 + width / 2, 3 + 5 + tstatOffset, 0x55FF55);
+        tstatOffset += 15;
 
-        gg.drawCenteredString( this.mc.font, getStatString(BLOCK), 6 + width / 2, 6 + 5 + tstatOffset, -1);
-        tstatOffset += 20;
+        gg.drawString( this.mc.font, getStatString(DEFENSE), 3, 3 + 5 + tstatOffset, -1);
+        tstatOffset += 15;
 
-        gg.drawCenteredString( this.mc.font, getStatString(DAMAGE), 6 + width / 2, 6 + 5 + tstatOffset, -1);
-        tstatOffset += 20;
+        gg.drawString( this.mc.font, getStatString(BLOCK), 3, 3 + 5 + tstatOffset, -1);
+        tstatOffset += 15;
 
-        gg.drawCenteredString( this.mc.font, getStatString(CRIT), 6 + width / 2, 6 + 5 + tstatOffset, -1);
-        tstatOffset += 20;
+        gg.drawString( this.mc.font, getStatString(DAMAGE), 3, 3 + 5 + tstatOffset, -1);
+        tstatOffset += 15;
+
+        gg.drawString( this.mc.font, getStatString(CRIT), 3, 3 + 5 + tstatOffset, -1);
+        tstatOffset += 15;
 
         if (reduceSize)
             gg.pose().scale(2f, 2f, 2f);
